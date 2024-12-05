@@ -11,6 +11,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { server } from './constants';
 
 export default function SignUp() {
   const [username, setUsername] = React.useState('');
@@ -64,7 +65,7 @@ export default function SignUp() {
         </View>
         <Pressable
           onPress={() => {
-            signupReq(username, password);
+            signupReq(username, password, navigation);
           }}
           color="#841584"
           style={{ alignSelf: 'center', marginTop: 30 }}
@@ -102,17 +103,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const signupReq = async (user, pass) => {
+const signupReq = async (user, pass, navigation) => {
   await axios
-    .post(
-      server + 'login',
-      QueryString.stringify({
-        username: user,
-        password: pass,
-      })
-    )
+    .post(server + 'registerUser', {
+      username: user,
+      password: pass,
+    })
     .then((res) => {
-      console.log(res.data);
+      if (res.status == 200) {
+        navigation.navigate('bottomTab');
+      }
     })
     .catch((err) => {
       console.log("Couldn't contacted to server : " + err);

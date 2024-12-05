@@ -74,7 +74,7 @@ function CardComponent({ title, content, author, date }) {
       >
         {date}
       </Text>
-      <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
         <Pressable style={{ alignSelf: 'center' }}>
           <Text
             style={{

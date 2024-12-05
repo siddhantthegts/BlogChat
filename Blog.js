@@ -16,6 +16,11 @@ export default function Blog() {
           },
         })
         .then((res) => {
+          if (res.data.rows.length < 1) {
+            console.log('No data fetched from server');
+          } else {
+            setBlogs(res.data);
+          }
           setBlogs(res.data);
         })
         .catch((err) => {
@@ -38,14 +43,18 @@ export default function Blog() {
       >
         Your uploaded blogs
       </Text>
-      {blogs.map((item) => (
-        <CardComponent
-          title={item.title}
-          author={item.username}
-          content={item.content}
-          date={item.timestamp}
-        />
-      ))}
+      {blogs.length >= 1 ? (
+        blogs.map((item) => (
+          <CardComponent
+            title={item.title}
+            author={item.username}
+            content={item.content}
+            date={item.timestamp}
+          />
+        ))
+      ) : (
+        <></>
+      )}
     </View>
   );
 }
