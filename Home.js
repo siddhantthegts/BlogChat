@@ -1,7 +1,13 @@
 import Entypo from '@expo/vector-icons/Entypo';
 import axios from 'axios';
 import React, { useEffect } from 'react';
-import { Pressable, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { credentials, server } from './constants';
 
@@ -23,19 +29,21 @@ export default function Home() {
         });
     };
     getBlogs();
-  }, []);
+  }, 60000);
 
   return (
-    <View>
-      {blogs.map((item) => (
-        <CardComponent
-          title={item.title}
-          author={item.username}
-          content={item.content}
-          date={item.timestamp}
-        />
-      ))}
-    </View>
+    <ScrollView>
+      <View>
+        {blogs.map((item) => (
+          <CardComponent
+            title={item.title}
+            author={item.username}
+            content={item.content}
+            date={item.timestamp}
+          />
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 

@@ -16,7 +16,7 @@ export default function Blog() {
           },
         })
         .then((res) => {
-          if (res.data.rows.length < 1) {
+          if (res.data.length < 1) {
             console.log('No data fetched from server');
           } else {
             setBlogs(res.data);

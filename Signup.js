@@ -11,7 +11,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
-import { server } from './constants';
+import { credentials, server } from './constants';
 
 export default function SignUp() {
   const [username, setUsername] = React.useState('');
@@ -110,7 +110,10 @@ const signupReq = async (user, pass, navigation) => {
       password: pass,
     })
     .then((res) => {
+      console.log(res.status);
       if (res.status == 200) {
+        credentials.token = res.data.token;
+        credentials.username = user;
         navigation.navigate('bottomTab');
       }
     })
